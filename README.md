@@ -73,3 +73,4 @@ JWT_EXPIRES_MINUTES=60
 - `GET /api/places`
 - `GET /api/places/{place_id}`
 - `GET /api/about`
+
