@@ -38,6 +38,7 @@ class Settings:
     mysql_database: str = os.getenv("MYSQL_DATABASE", "my_bb")
     mysql_user: str = os.getenv("MYSQL_USER", "my_bb_user")
     mysql_password: str = os.getenv("MYSQL_PASSWORD", "my_bb_password")
+    mysql_url: str | None = os.getenv("MYSQL_PUBLIC_URL") or os.getenv("DATABASE_URL") or os.getenv("MYSQL_URL")
 
     log_level: str = os.getenv("LOG_LEVEL", "INFO")
     log_file_path: str = os.getenv("LOG_FILE_PATH", "backend/logs/app.log")
@@ -50,6 +51,9 @@ class Settings:
 
     @property
     def database_url(self) -> str:
+        if self.mysql_url:
+            return self.mysql_url.replace("mysql://", "mysql+pymysql://", 1)
+
         return (
             f"mysql+pymysql://{self.mysql_user}:{self.mysql_password}"
             f"@{self.mysql_host}:{self.mysql_port}/{self.mysql_database}"
