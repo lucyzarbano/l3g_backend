@@ -84,6 +84,17 @@ class PlaceSchema(BaseModel):
     info: list[PlaceInfoItemSchema] = []
 
 
+class PlaceAdminSchema(BaseModel):
+    id: str
+    nome: str
+    descrizione: str
+    indirizzo: str
+    distanzaKm: float
+    immagine: str
+    categoria: str
+    attivo: bool
+
+
 class AboutImageSchema(BaseModel):
     src: str
     alt: str
